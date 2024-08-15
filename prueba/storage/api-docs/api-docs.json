@@ -1,0 +1,193 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Tareas",
+        "description": "Documentación de la API para gestionar tareas.",
+        "contact": {
+            "email": "contacto@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tareas": {
+            "get": {
+                "summary": "Obtener todas las tareas",
+                "operationId": "6733ab2dc67122575c368d93ff4c1308",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tareas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Tarea"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crear una nueva tarea",
+                "operationId": "cff34cbb3cdf575de33470453733f08c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tarea"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarea creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarea"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta"
+                    }
+                }
+            }
+        },
+        "/api/tareasEditar/{tarea}": {
+            "get": {
+                "summary": "Obtener una tarea por ID",
+                "operationId": "fc9e2df0ee6e5c9a18ee202333b86557",
+                "parameters": [
+                    {
+                        "name": "tarea",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tarea encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarea"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarea no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/tareasActualizar/{tarea}": {
+            "put": {
+                "summary": "Actualizar una tarea por ID",
+                "operationId": "e7ff0b85058f04cd7f51c614459eecc6",
+                "parameters": [
+                    {
+                        "name": "tarea",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tarea"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tarea actualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarea"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarea no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/tareasEliminar/{tarea}": {
+            "delete": {
+                "summary": "Eliminar una tarea por ID",
+                "operationId": "79325b52d02a31825076afd28bea1ff7",
+                "parameters": [
+                    {
+                        "name": "tarea",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tarea eliminada exitosamente"
+                    },
+                    "404": {
+                        "description": "Tarea no encontrada"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tarea": {
+                "properties": {
+                    "id": {
+                        "description": "ID de la tarea",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "titulo": {
+                        "description": "Título de la tarea",
+                        "type": "string"
+                    },
+                    "descripcion": {
+                        "description": "Descripción de la tarea",
+                        "type": "string"
+                    },
+                    "fecha_vencimiento": {
+                        "description": "Fecha de vencimiento de la tarea",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "estado": {
+                        "description": "Estado de la tarea",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
